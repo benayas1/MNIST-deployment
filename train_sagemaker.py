@@ -7,6 +7,7 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.optim.lr_scheduler import StepLR
 from mnist_demo.models.model import Net
+from mnist_demo.models.dataset import MyMNIST
 import os
 import ssl
 
@@ -57,9 +58,9 @@ def main():
 
 
     # Data, model, and output directories
-    parser.add_argument('--model_dir', type=str)#, default=os.environ['SM_MODEL_DIR'])
-    #parser.add_argument('--train', type=str, default=os.environ['SM_CHANNEL_TRAIN'])
-    #parser.add_argument('--test', type=str, default=os.environ['SM_CHANNEL_TEST'])
+    parser.add_argument('--model_dir', type=str, default=os.environ['SM_MODEL_DIR'])
+    parser.add_argument('--train', type=str, default=os.environ['SM_CHANNEL_TRAIN'])
+    parser.add_argument('--test', type=str, default=os.environ['SM_CHANNEL_TEST'])
 
     args, _ = parser.parse_known_args()
     if args.model_dir is None:
@@ -88,8 +89,8 @@ def main():
         transforms.Normalize((0.1307,), (0.3081,))
         ])
     print('Downloading dataset')
-    dataset1 = datasets.MNIST('../data', train=True, download=True, transform=transform)
-    dataset2 = datasets.MNIST('../data', train=False, transform=transform)
+    dataset1 = MyMNIST(args.train)
+    dataset2 = MyMNIST(args.test)
     print('Dataset downloaded successfully')
     train_loader = torch.utils.data.DataLoader(dataset1,**train_kwargs)
     test_loader = torch.utils.data.DataLoader(dataset2, **test_kwargs)
