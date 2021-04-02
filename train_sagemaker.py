@@ -57,10 +57,10 @@ def main():
     parser.add_argument('--use_cuda', type=bool, default=False)
 
     print(f"Source {os.environ['SM_MODEL_DIR']}")
-    print(f"Channel {os.environ['SM_CHANNEL_XXXX']}")
+    print(f"Channel {os.environ['SM_CHANNEL_TRAINING']}")
     # Data, model, and output directories
     parser.add_argument('--model_dir', type=str, default=os.environ['SM_MODEL_DIR'])
-    parser.add_argument('--channel', type=str, default=os.environ['SM_CHANNEL_XXXX'])
+    parser.add_argument('--channel', type=str, default=os.environ['SM_CHANNEL_TRAINING'])
     #parser.add_argument('--train', type=str, default=os.environ['SM_CHANNEL_TRAIN'])
     #parser.add_argument('--test', type=str, default=os.environ['SM_CHANNEL_TEST'])
 
