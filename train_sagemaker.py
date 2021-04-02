@@ -56,8 +56,8 @@ def main():
     parser.add_argument('--gamma', type=float, default=0.7, metavar='M', help='Learning rate step gamma (default: 0.7)')
     parser.add_argument('--use_cuda', type=bool, default=False)
 
-    print(f'Source {os.environ['SM_MODEL_DIR']}')
-    print(f'Channel {os.environ['SM_CHANNEL_XXXX']}')
+    print(f"Source {os.environ['SM_MODEL_DIR']}")
+    print(f"Channel {os.environ['SM_CHANNEL_XXXX']}")
     # Data, model, and output directories
     parser.add_argument('--model_dir', type=str, default=os.environ['SM_MODEL_DIR'])
     parser.add_argument('--channel', type=str, default=os.environ['SM_CHANNEL_XXXX'])
