@@ -24,7 +24,7 @@ def model_fn(model_dir):
     Used only when Elastic Inference is not used.
     """
     model = Net()
-    with open(os.path.join(model_dir, 'model_cnn.pth'), 'rb') as f: # model_cnn.pth is the name given in the train script
+    with open(os.path.join(model_dir, 'model.pth'), 'rb') as f: # model_cnn.pth is the name given in the train script
         model.load_state_dict(torch.load(f))
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
