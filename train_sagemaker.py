@@ -103,9 +103,9 @@ def main():
         test(model, device, test_loader)
         scheduler.step()
 
-    savepath = os.path.join(model_dir, 'model.pth')
+    savepath = os.path.join(model_dir, 'model_cnn.pth')
     with open(savepath, 'wb') as f:
-        print('Saving model into {savepath}')
+        print(f'Saving model into {savepath}')
         torch.save(model.state_dict(), f)
 
 
