@@ -47,6 +47,9 @@ def test(model, device, test_loader):
         test_loss, correct, len(test_loader.dataset),
         100. * correct / len(test_loader.dataset)))
 
+
+
+
 def main():
     # Training settings
     parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
@@ -87,9 +90,10 @@ def main():
         transforms.ToTensor(),
         transforms.Normalize((0.1307,), (0.3081,))
         ])
-    print('Downloading dataset')
+    print(f'Downloading dataset from {args.channel}')
     dataset1 = MyMNIST(os.path.join(args.channel, 'training.pt'), transform=transform)
     dataset2 = MyMNIST(os.path.join(args.channel, 'test.pt'), transform=transform)
+
     print('Dataset downloaded successfully')
     train_loader = torch.utils.data.DataLoader(dataset1,**train_kwargs)
     test_loader = torch.utils.data.DataLoader(dataset2, **test_kwargs)
