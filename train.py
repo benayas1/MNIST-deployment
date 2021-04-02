@@ -7,6 +7,7 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.optim.lr_scheduler import StepLR
 from mnist_demo.models.model import Net
+from mnist_demo.models.dataset import MyMNIST
 import os
 import ssl
 
@@ -88,8 +89,11 @@ def main():
         transforms.Normalize((0.1307,), (0.3081,))
         ])
     print('Downloading dataset')
-    dataset1 = datasets.MNIST('../data', train=True, download=True, transform=transform)
-    dataset2 = datasets.MNIST('../data', train=False, transform=transform)
+    print(os.path.join('../data/MNIST/processed', 'training.pt'))
+    dataset1 = MyMNIST(os.path.join('../data/MNIST/processed', 'training.pt'), transform=transform)
+    #datasets.MNIST('../data', train=True, download=True, transform=transform)
+    dataset2 = MyMNIST(os.path.join('../data/MNIST/processed', 'test.pt'), transform=transform)
+    #datasets.MNIST('../data', train=False, transform=transform)
     print('Dataset downloaded successfully')
     train_loader = torch.utils.data.DataLoader(dataset1,**train_kwargs)
     test_loader = torch.utils.data.DataLoader(dataset2, **test_kwargs)

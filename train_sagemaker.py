@@ -65,10 +65,7 @@ def main():
     #parser.add_argument('--test', type=str, default=os.environ['SM_CHANNEL_TEST'])
 
     args, _ = parser.parse_known_args()
-    if args.model_dir is None:
-        model_dir = os.getenv('SM_MODEL_DIR')
-    else:
-        model_dir = args.model_dir
+    model_dir = args.model_dir
 
     use_cuda = args.use_cuda and torch.cuda.is_available()
 
@@ -91,8 +88,8 @@ def main():
         transforms.Normalize((0.1307,), (0.3081,))
         ])
     print('Downloading dataset')
-    dataset1 = MyMNIST(os.path.join(args.channel, 'training.pt'))
-    dataset2 = MyMNIST(os.path.join(args.channel, 'test.pt'))
+    dataset1 = MyMNIST(os.path.join(args.channel, 'training.pt'), transform=transform)
+    dataset2 = MyMNIST(os.path.join(args.channel, 'test.pt'), transform=transform)
     print('Dataset downloaded successfully')
     train_loader = torch.utils.data.DataLoader(dataset1,**train_kwargs)
     test_loader = torch.utils.data.DataLoader(dataset2, **test_kwargs)
