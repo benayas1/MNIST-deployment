@@ -59,8 +59,9 @@ def main():
 
     # Data, model, and output directories
     parser.add_argument('--model_dir', type=str, default=os.environ['SM_MODEL_DIR'])
-    parser.add_argument('--train', type=str, default=os.environ['SM_CHANNEL_TRAIN'])
-    parser.add_argument('--test', type=str, default=os.environ['SM_CHANNEL_TEST'])
+    parser.add_argument('--channel', type=str, default=os.environ['SM_CHANNEL_XXXX'])
+    #parser.add_argument('--train', type=str, default=os.environ['SM_CHANNEL_TRAIN'])
+    #parser.add_argument('--test', type=str, default=os.environ['SM_CHANNEL_TEST'])
 
     args, _ = parser.parse_known_args()
     if args.model_dir is None:
@@ -89,8 +90,8 @@ def main():
         transforms.Normalize((0.1307,), (0.3081,))
         ])
     print('Downloading dataset')
-    dataset1 = MyMNIST(args.train)
-    dataset2 = MyMNIST(args.test)
+    dataset1 = MyMNIST(os.path.join(args.channel, 'training.pt'))
+    dataset2 = MyMNIST(os.path.join(args.channel, 'test.pt'))
     print('Dataset downloaded successfully')
     train_loader = torch.utils.data.DataLoader(dataset1,**train_kwargs)
     test_loader = torch.utils.data.DataLoader(dataset2, **test_kwargs)
