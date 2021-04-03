@@ -1,7 +1,7 @@
 build==0.3.1.post1
 dataclasses==0.8
 importlib-metadata==3.10.0
-mnist-demo @ git+https://github.com/benayas1/MNIST-deployment.git
+mnist-demo @ git+https://github.com/benayas1/MNIST-deployment.git@478f3f8d9446fed3426a384d436e7f94cd1303e6
 numpy==1.19.5
 packaging==20.9
 pandas==1.1.5
@@ -12,7 +12,7 @@ python-dateutil==2.8.1
 pytz==2021.1
 six==1.15.0
 toml==0.10.2
-torch==1.8.1
-torchvision==0.9.1
+torch==1.8.0
+torchvision==0.9.0
 typing-extensions==3.7.4.3
 zipp==3.4.1
